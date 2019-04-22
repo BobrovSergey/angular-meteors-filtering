@@ -12,7 +12,7 @@ import { map, switchMap, tap } from 'rxjs/operators';
 })
 export class AppComponent implements OnInit {
   title = 'meteors';
-  years: number[];
+  years: number[] = [];
   filters$ = new BehaviorSubject({year: null, mass: null});
   meteors$: Observable<MeteorInterface[]>;
   isNotificationVisible = false;
@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-  filtersChanged(filter) {
+  filtersChanged(filter): void {
     this.filters$.next(filter);
   }
 
@@ -86,5 +86,4 @@ export class AppComponent implements OnInit {
   private onlyUnique(value: number, index: number, self: number[]): boolean {
     return self.indexOf(value) === index;
   }
-
 }
