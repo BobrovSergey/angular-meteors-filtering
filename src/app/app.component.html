@@ -1,0 +1,13 @@
+<app-filters
+  #filters
+  [years]="years"
+  (filtersChanged)="filtersChanged($event)"
+></app-filters>
+
+<div class="no-mass-found" *ngIf="isNotificationVisible">
+  Mass was not found, jumping to first-year where there is a mass that fits the criteria
+</div>
+
+<app-meteors-list
+  [meteors]="meteors$ | async"
+></app-meteors-list>

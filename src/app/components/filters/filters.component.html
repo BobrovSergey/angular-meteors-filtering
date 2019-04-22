@@ -1,0 +1,11 @@
+<div class="filters">
+  <label for="select-year">Select year: </label>
+  <select name="year" id="select-year" [formControl]="yearFilterControl">
+    <option value="">Select year</option>
+    <option *ngFor="let year of years" value="{{year}}">{{year}}</option>
+  </select>
+  <span class="mass-filter" *ngIf="yearFilterControl.value">
+    <label for="mass">Mass is larger then:</label>
+    <input [formControl]="massFilterControl" type="text" id="mass">
+  </span>
+</div>

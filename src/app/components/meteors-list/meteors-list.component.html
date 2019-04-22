@@ -1,0 +1,6 @@
+<div class="meteors" *ngIf="meteors">
+  <div class="total">Total: {{meteors.length}}</div>
+  <div class="meteor" *ngFor="let meteor of meteors">
+    {{meteor.name}} ({{meteor.year | date:'yyyy'}}) (Mass: {{meteor.mass}})
+  </div>
+</div>
