@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -13,6 +14,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
   massFilterControl = new FormControl('');
   @Input() years: number[] = [];
   @Output() filtersChanged = new EventEmitter();
+
   private cancelSubscription$ = new Subject<void>();
 
   ngOnInit() {
@@ -20,20 +22,21 @@ export class FiltersComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.cancelSubscription$)
       )
-      .subscribe(val => {
+      .subscribe(year => {
         this.filtersChanged.emit({
-          year: +val,
-          mass: +this.massFilterControl.value
+          year: parseInt(year, 10),
+          mass: parseInt(this.massFilterControl.value, 10)
         });
     });
+
     this.massFilterControl.valueChanges
       .pipe(
         takeUntil(this.cancelSubscription$)
       )
-      .subscribe(val => {
+      .subscribe(mass => {
         this.filtersChanged.emit({
-          year: +this.yearFilterControl.value,
-          mass: +val
+          year: parseInt(this.yearFilterControl.value, 10),
+          mass: parseInt(mass, 10),
         });
     });
   }
